@@ -1,0 +1,759 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Baehike – Adventure Awaits</title>
+
+    <!-- ======  FONTS & ICONS  ====== -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- ======  GLOBAL STYLES  ====== -->
+    <style>
+        :root {
+            --clr-bg: #f5f5f7;
+            --clr-text: #1d1d1f;
+            --clr-dark: #0d0d0e;
+            --clr-accent: #0071e3;
+            --transition: all .35s ease;
+        }
+
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            padding: 0;
+            margin: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Inter", "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+            background: var(--clr-bg);
+            color: var(--clr-text);
+            -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
+        }
+
+        /* ----  NAVBAR  ---- */
+        .navbar {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    height: 64px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 2rem;
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(12px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    z-index: 1000;
+  }
+  
+  /* Logo and name */
+  .logo-container {
+    display: flex;
+    align-items: center;
+  }
+  .logo {
+    height: 44px;
+    width: 44px;
+    border-radius: 50%;
+    margin-right: 0.75rem;
+  }
+  .site-name {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #1d1d1f;
+  }
+  
+  /* Nav links */
+  .nav-links {
+    display: flex;
+    gap: 1.5rem;
+  }
+  .nav-links a {
+    text-decoration: none;
+    color: #1d1d1f;
+    font-weight: 500;
+    position: relative;
+    transition: color 0.3s;
+  }
+  .nav-links a::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: -4px;
+    left: 0;
+    background-color: #0071e3;
+    transition: width 0.3s ease;
+  }
+  .nav-links a:hover::after {
+    width: 100%;
+  }
+  .nav-links a:hover {
+    color: #0071e3;
+  }
+  
+  /* Hamburger menu */
+  .menu-toggle {
+    font-size: 1.8rem;
+    display: none;
+    cursor: pointer;
+  }
+  
+  /* Responsive nav */
+  @media (max-width: 768px) {
+    .menu-toggle {
+      display: block;
+    }
+    .nav-links {
+      position: absolute;
+      top: 64px;
+      right: 0;
+      background: rgba(255, 255, 255, 0.95);
+      flex-direction: column;
+      width: 200px;
+      padding: 1rem;
+      display: none;
+      box-shadow: -2px 4px 12px rgba(0,0,0,0.1);
+    }
+    .nav-links a {
+      padding: 0.5rem 0;
+    }
+    .nav-links.show {
+      display: flex;
+    }
+  }
+        /* ----  HERO  ---- */
+        .hero {
+            height: 100vh;
+            background: url(mountain.jpg) center/cover no-repeat;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            text-align: center;
+            position: relative;
+        }
+
+        .hero::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: rgba(0, 0, 0, .45);
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            color: #fff;
+            padding: 0 1.5rem;
+        }
+
+        .hero-content h1 {
+            font-size: clamp(3rem, 6vw, 4.5rem);
+            font-weight: 700;
+            line-height: 1.1;
+            letter-spacing: -.03em;
+            margin-bottom: .75rem;
+        }
+
+        .hero-content p {
+            margin-bottom: 30px;
+
+        }
+
+        .btn-primary {
+            display: inline-block;
+            padding: .85rem 2rem;
+            border-radius: 30px;
+            font-weight: 600;
+            text-decoration: none;
+            color: #fff;
+            background: var(--clr-accent);
+            transition: var(--transition);
+        }
+
+        #hitesh {
+            font-size: 50px;
+            font-weight: 700;
+            line-height: 1.1;
+            letter-spacing: -.03em;
+            margin-bottom: .75rem;
+            margin-left: 150px;
+        }
+
+        #hitesh a {
+            text-decoration: none;
+            color: #f3f3f7;
+        }
+
+        #hitesh {
+            font-size: 50px;
+            background: -webkit-linear-gradient(#727171, #0e5909);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        #hitesh:hover{
+            font-size: 50px;
+            background: -webkit-linear-gradient(#726f6f, #540854);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            transition: 1s;
+
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, .15);
+        }
+
+        /* ----  DESTINATIONS  ---- */
+        #destinations {
+            padding: 6rem 1.5rem 8rem;
+            max-width: 1200px;
+            margin-inline: auto;
+        }
+
+        #destinations h2 {
+            font-size: 2.25rem;
+            text-align: center;
+            font-weight: 700;
+            margin-bottom: 3.5rem;
+        }
+
+        .grid {
+            display: grid;
+            gap: 2rem;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        }
+
+        .card {
+            position: relative;
+            overflow: hidden;
+            border-radius: 24px;
+            min-height: 380px;
+            cursor: pointer;
+            color: #fff;
+            transform: translateY(20px);
+            opacity: 0;
+            transition: var(--transition);
+        }
+
+        .card img {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+
+        .card::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: rgba(0, 0, 0, .35);
+            transition: var(--transition);
+        }
+
+        .card-content {
+            position: absolute;
+            bottom: 0;
+            padding: 1.5rem 2rem;
+            z-index: 1;
+        }
+
+        .card-content h3 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: .5rem;
+        }
+
+        .card-content p {
+            font-size: .95rem;
+            line-height: 1.5;
+            margin-bottom: 1.25rem;
+            opacity: .9;
+        }
+
+        .btn-secondary {
+            padding: .65rem 1.5rem;
+            border-radius: 24px;
+            background: rgba(255, 255, 255, .85);
+            color: var(--clr-dark);
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-block;
+            transition: var(--transition);
+        }
+
+        .btn-secondary:hover {
+            background: #fff;
+        }
+
+        .card:hover img {
+            transform: scale(1.08);
+        }
+
+        .card:hover::after {
+            background: rgba(0, 0, 0, .5);
+        }
+
+        /* ----  ABOUT  ---- */
+        #about {
+            background: #fff;
+            padding: 6rem 1.5rem;
+        }
+
+        #about h2 {
+            text-align: center;
+            font-size: 2rem;
+            margin-bottom: 2.25rem;
+            font-weight: 700;
+        }
+
+        #about p {
+            max-width: 860px;
+            margin-inline: auto;
+            font-size: 1.1rem;
+            line-height: 1.7;
+            letter-spacing: -.015em;
+        }
+
+        #about {
+            background-color: rgb(168, 246, 148);
+            border-radius: 25px;
+            margin-left: 10px;
+            margin-right: 10px;
+        }
+
+        /* ----  FOOTER  ---- */
+        footer {
+            padding: 3rem 1.5rem;
+            text-align: center;
+            font-size: .9rem;
+            color: rgba(0, 0, 0, .6);
+        }
+
+        /* ----  UTILITIES  ---- */
+        .reveal {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+
+        .reviews-section {
+            padding: 40px;
+            background-color: #fff;
+            text-align: center;
+        }
+
+        .reviews-section h2 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        .reviews-container {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .review-card {
+            background: #ffffff;
+            padding: 20px;
+            width: 300px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            opacity: 0;
+            transform: translateY(30px);
+            animation: slideUpFade 1s forwards;
+        }
+
+        .review-card:nth-child(2) {
+            animation-delay: 0.3s;
+        }
+
+        .review-card:nth-child(3) {
+            animation-delay: 0.6s;
+        }
+
+        .stars {
+            color: #f7b731;
+            margin: 10px 0;
+        }
+
+        @keyframes slideUpFade {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+        .reviews {
+  width: 100%;
+  padding: 3rem 1rem;
+  background-image: url(notes.jpg)center/cover no-repeat;;
+  
+  text-align: center;
+}
+
+.reviews h2 {
+  font-size: 2rem;
+  color: #333;
+  margin-bottom: 2rem;
+}
+
+.slider-wrapper {
+  position: relative;
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+  height: 250px;
+  overflow: hidden;
+}
+
+.review-card {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 1.5rem;
+  background: white;
+  border-radius: 15px;
+  box-shadow: 0 12px 25px rgba(0, 0, 0, 0.1);
+  opacity: 0;
+  transform: scale(0.95);
+  transition: opacity 1s ease, transform 1s ease;
+}
+
+.review-card.active {
+  opacity: 1;
+  transform: scale(1);
+  z-index: 1;
+}
+
+.review-card p {
+  font-size: 1rem;
+  color: #555;
+  margin-bottom: 0.5rem;
+}
+
+.review-card h4 {
+  font-size: 1rem;
+  color: #0072ff;
+}
+
+.stars {
+  color: #f39c12;
+  font-size: 1.2rem;
+}
+
+/* Mobile Responsive */
+@media (max-width: 600px) {
+  .review-card {
+    padding: 1.2rem;
+    height: auto;
+  }
+
+  .reviews h2 {
+    font-size: 1.5rem;
+  }
+}
+/* Contact Section */
+.contact-section {
+  width: 100%;
+  padding: 2rem;
+  display: flex;
+  justify-content: center;
+}
+
+.contact-card {
+  background: #ffffff;
+  padding: 2rem;
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  max-width: 400px;
+  width: 100%;
+  transition: transform 0.3s ease;
+}
+
+.contact-card:hover {
+  transform: translateY(-5px);
+}
+
+.contact-card h2 {
+  color: #333;
+  margin-bottom: 1rem;
+  font-size: 2rem;
+}
+
+.contact-card p {
+  color: #555;
+  font-size: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+/* Button Styling */
+.query-button {
+  display: inline-block;
+  padding: 0.75rem 1.5rem;
+  background: linear-gradient(135deg, #ff6a00, #ee0979);
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+  border-radius: 30px;
+  box-shadow: 0 8px 20px rgba(255, 106, 0, 0.4);
+  transition: background 0.3s ease, transform 0.2s;
+}
+
+.query-button:hover {
+  transform: scale(1.05);
+  background: linear-gradient(135deg, #ff8c42, #f83600);
+}
+
+/* Responsive Design */
+@media (max-width: 600px) {
+  .contact-card {
+    padding: 1.5rem;
+  }
+
+  .contact-card h2 {
+    font-size: 1.5rem;
+  }
+
+  .contact-card p {
+    font-size: 0.95rem;
+  }
+
+  .query-button {
+    padding: 0.6rem 1.2rem;
+    font-size: 0.95rem;
+  }
+}
+    </style>
+</head>
+
+<body>
+    <!-- ======  NAVBAR  ====== -->
+    <header class="navbar">
+        <div class="logo-container">
+          <img src="baehike.jpg" alt="Logo" class="logo" />
+          <span class="site-name">BaeHike.in</span>
+        </div>
+    
+        <div class="menu-toggle" id="menu-toggle">☰</div>
+    
+        <nav class="nav-links" id="nav-links">
+          <a href="#destinations">Destinations</a>
+          <a href="#services">Services</a>
+          <a href="#contact">Contact Us</a>
+        </nav>
+      </header>
+
+    <!-- ======  HERO  ====== -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h1>Adventure Awaits</h1>
+            <p>Discover breathtaking trails &amp; soulful journeys across the Himalayas with the one you love.</p>
+            <a href="#destinations" class="btn-primary">Explore Destinations</a>
+        </div>
+    </section>
+
+    <!-- ======  DESTINATIONS  ====== -->
+    <section id="destinations">
+        <h2>Hand‑Picked Escapes</h2>
+
+        <div class="grid">
+            <!-- MANALI -->
+            <div class="card">
+                <img src="https://images.unsplash.com/photo-1541233349642-6e425fe6190e?auto=format&fit=crop&w=1000&q=60"
+                    alt="Manali">
+                <div class="card-content">
+                    <h3>Manali</h3>
+                    <p>Misty valleys, apple orchards & winding rivers. Perfect for romance and thrills alike.</p>
+                    <a href="http://wa.me/917678576564" class="btn-secondary">Plan Trip</a>
+                </div>
+            </div>
+
+            <!-- MCLEODGANJ -->
+            <div class="card">
+                <img src="https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?auto=format&fit=crop&w=1000&q=60"
+                    alt="McLeodganj">
+                <div class="card-content">
+                    <h3>McLeodganj</h3>
+                    <p>Experience Tibetan culture, serene monasteries & sunrise views over the Dhauladhars.</p>
+                    <a href="http://wa.me/917678576564" class="btn-secondary">Plan Trip</a>
+                </div>
+            </div>
+
+            <!-- RISHIKESH -->
+            <div class="card">
+                <img src="Rishikesh.jpg"
+                    alt="Rishikesh">
+                <div class="card-content">
+                    <h3>Rishikesh</h3>
+                    <p>From serene Ganga aartis to adrenaline‑pumping rafting, find your balance here.</p>
+                    <a href="http://wa.me/917678576564" class="btn-secondary">Plan Trip</a>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="reviews">
+        <h2>🌟 What Our Travelers Say</h2>
+        <div class="slider-wrapper">
+          <div class="review-card active">
+            <p>"The best trip I've ever had! Everything was arranged perfectly."</p>
+            <div class="stars">⭐⭐⭐⭐⭐</div>
+            <h4>- Ananya Verma</h4>
+          </div>
+          <div class="review-card">
+            <p>"Excellent service and beautiful destination. Highly recommended!"</p>
+            <div class="stars">⭐⭐⭐⭐⭐</div>
+            <h4>- Rajesh Singh</h4>
+          </div>
+          <div class="review-card">
+            <p>"Amazing experience! The support team was very helpful."</p>
+            <div class="stars">⭐⭐⭐⭐⭐</div>
+            <h4>- Sneha Desai</h4>
+          </div>
+          <div class="review-card">
+            <p>"Memorable journey with well-managed itinerary."</p>
+            <div class="stars">⭐⭐⭐⭐⭐</div>
+            <h4>- Kavya Iyer</h4>
+          <div class="review-card">
+            <p>"Excellent service and beautiful destination. Highly recommended!"</p>
+            <div class="stars">⭐⭐⭐⭐⭐</div>
+            <h4>- Manan</h4>
+          </div>
+          <div class="review-card">
+            <p>"Amazing experience! The support team was very helpful."</p>
+            <div class="stars">⭐⭐⭐⭐⭐</div>
+            <h4>- Krunal singhania</h4>
+          </div>
+          <div class="review-card">
+            <p>"Memorable journey with well-managed itinerary."</p>
+            <div class="stars">⭐⭐⭐⭐⭐</div>
+            <h4>- Nitesh</h4>
+          </div>
+        </div>
+      </section>
+
+
+    <!-- ======  ABOUT  ====== -->
+    <section id="about">
+        <h2>About Us</h2>
+        <p>
+            Baehike was born from the belief that the greatest journeys are shared. We curate immersive, eco‑conscious
+            itineraries that bring couples closer to nature and to each other. Every trip is crafted with meticulous
+            attention to detail – from hand‑picked homestays and local guides to mindful adventures that leave the
+            lightest footprint.
+        </p>
+    </section>
+    <section class="contact-section">
+        <div class="contact-card">
+          <h2>Need Help?</h2>
+          <p>Have a question or concern? We're just a click away.</p>
+          <a href="http://wa.me/917678576564" target="_blank" class="query-button">Send a Query</a>
+        </div>
+      </section>
+
+    <!-- ======  FOOTER  ====== -->
+    <footer id="contact">
+        <p>Ready for your next adventure? <strong>Say hi at <a
+                    href="mailto:trips@baehike.com">baehike.in@gmail.com</a></strong></p>
+        <p>© <span id="year"></span> Baehike Travel Co. All rights reserved.</p>
+    </footer>
+
+    <!-- ======  SCRIPTS  ====== -->
+    <script>
+        // Year auto‑update
+        document.getElementById('year').textContent = new Date().getFullYear();
+
+        // Intersection Observer for reveal animations
+        const observer = new IntersectionObserver((entries, obs) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('reveal');
+                    obs.unobserve(entry.target);
+                }
+            });
+        }, { threshold: .15 });
+
+        document.querySelectorAll('.card').forEach(card => observer.observe(card));
+
+        // Smooth scroll for browsers that don't support native CSS smooth behavior
+        document.querySelectorAll('nav a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({ behavior: 'smooth' });
+            });
+        });
+        const reviews = document.querySelectorAll(".review-card");
+let index = 0;
+
+function cycleReviews() {
+  reviews[index].classList.remove("active");
+  index = (index + 1) % reviews.length;
+  reviews[index].classList.add("active");
+}
+
+setInterval(cycleReviews, 1000);
+
+        function createReviewCard(review) {
+            const card = document.createElement("div");
+            card.classList.add("review-card");
+
+            card.innerHTML = `
+    <p>${review.message}</p>
+    <div class="stars">${getStars(review.rating)}</div>
+    <strong>- ${review.name}</strong>
+  `;
+            return card;
+        }
+
+        // Inject reviews
+        reviews.forEach((review) => {
+            const card = createReviewCard(review);
+            reviewsContainer.appendChild(card);
+        });
+        const menuToggle = document.getElementById("menu-toggle");
+const navLinks = document.getElementById("nav-links");
+
+menuToggle.addEventListener("click", () => {
+  navLinks.classList.toggle("show");
+});
+    </script>
+</body>
+
+</html>

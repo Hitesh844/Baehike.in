@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Baehike Travel — Invoice</title>
+  <!-- Fonts & Icons -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha512-xX2X+8dkgvVbRk2cB6SBQqz8KEilI5a+Cx6RvqHbkTcA+Adc9zX0HBMsp7uI48iPaQEZHuZ2sBuQSZP4M+hYmw==" crossorigin="anonymous" referrerpolicy="no-referrer"/>
+  <style>
+    :root {
+      --clr-primary:#0a2540;      /* Navy */
+      --clr-secondary:#166087;    /* Lighter Navy */
+      --clr-accent:#ffb200;       /* Warm Accent */
+      --clr-surface:#ffffff;      /* Card / Paper */
+      --clr-background:#f2f6fa;   /* Page bg */
+      --clr-muted:#6b7c93;        /* Muted text */
+      --clr-border:#e1e8f1;       /* Subtle border */
+      --radius-lg:18px;
+      --radius-md:12px;
+    }
+    h1{
+        text-align: center;
+    }
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+    html{scroll-behavior:smooth;}
+    body{
+      background:var(--clr-background);
+      font-family:'Inter',sans-serif;
+      color:var(--clr-primary);
+      padding:50px 24px;
+      line-height:1.55;
+    }
+
+    /* ================= Invoice Shell ================= */
+    .invoice{
+      max-width:860px;
+      margin:auto;
+      background:var(--clr-surface);
+      border-radius:var(--radius-lg);
+      box-shadow:0 14px 48px rgba(10,37,64,.08);
+      overflow:hidden;
+      position:relative;
+    }
+
+    /* ===== Header with subtle wave ===== */
+    .invoice__header{
+      position:relative;
+      background:linear-gradient(135deg,var(--clr-primary) 0%,var(--clr-secondary) 100%);
+      color:#fff;
+      padding:32px 40px 56px; /* extra bottom for wave */
+      display:flex;
+      align-items:center;
+      gap:24px;
+    }
+    .invoice__header img{
+      width:88px;height:88px;object-fit:cover;border-radius:50%;border:5px solid rgba(255,255,255,.25);
+    }
+    .invoice__header h1{
+      font-size:2.25rem;
+      font-weight:700;
+      letter-spacing:1px;
+    }
+    /* wave */
+    .invoice__header::after{
+      content:"";
+      position:absolute;
+      left:0;right:0;bottom:-1px;height:40px;
+      background:url("baehike") center/cover repeat-x;
+      transform:rotate(180deg);
+    }
+
+    /* ================== Content ================== */
+    .invoice__content{padding:40px 10px 32px;}
+    .section-title{
+      font-size:1rem;
+      font-weight:600;
+      color:var(--clr-secondary);
+      margin-bottom:14px;
+      text-transform:uppercase;
+      letter-spacing:.8px;
+    }
+
+    /* Grid for info */
+    .info-grid{
+      display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:28px;margin-bottom:36px;
+    }
+    .info-box{
+      border:1px solid var(--clr-border);
+      border-radius:var(--radius-md);
+      padding:20px 24px;
+      background:#fbfcfe;
+    }
+    .info-box p{font-size:.94rem;color:var(--clr-primary);margin:6px 0;}
+    .info-box strong{color:var(--clr-muted);font-weight:600;min-width:110px;display:inline-block;}
+
+    /* ================= Table ================= */
+    table{width:100%;border-collapse:collapse;font-size:.95rem;margin-bottom:28px;}
+    thead tr{background:var(--clr-primary);color:#fff;}
+    th,td{padding:14px;border:1px solid var(--clr-border);text-align:left;vertical-align:top;}
+    tbody tr:nth-child(even){background:var(--clr-background);}
+    td:nth-child(3),td:nth-child(4),td:nth-child(5){text-align:center;}
+
+    /* ============= Totals ============= */
+    .totals-table{max-width:320px;margin-left:auto;border:1px solid var(--clr-border);border-radius:var(--radius-md);overflow:hidden;}
+    .totals-table tr:not(:last-child) td{border-bottom:1px solid var(--clr-border);}   
+    .totals-table td{padding:14px 18px;}
+    .totals-table td:first-child{font-weight:600;color:var(--clr-primary);}   
+    .totals-table tr:last-child td{font-size:1rem;font-weight:700;background:var(--clr-background);}  
+    .totals-table td:last-child{text-align:right;min-width:130px;}
+
+    /* ============= Refund Policy ============= */
+    .policy{
+      font-size:.85rem;margin-top:32px;color:var(--clr-muted);line-height:1.6;background:#fbfcfe;border:1px dashed var(--clr-border);padding:18px 22px;border-radius:var(--radius-md);
+    }
+    .policy strong{color:var(--clr-primary);}
+
+    /* ============= Footer ============= */
+    .footer{
+      text-align:center;font-size:.85rem;color:var(--clr-muted);background:#f9fafc;padding:18px;border-top:1px solid var(--clr-border);
+    }
+
+    /* ================== Print tweaks ================== */
+    @media print{
+      body{background:#fff;padding:0;}
+      .invoice{box-shadow:none;border-radius:0;}
+      .invoice__header::after{display:none;}
+    }
+  </style>
+</head>
+<body>
+  <section class="invoice">
+    <!-- ===== HEADER ===== -->
+    <div class="invoice__header">
+      <img src="baehike.jpg" alt="Baehike Logo" />
+      <h1 style=" padding-left: 150px;">BAEHIKE.IN</h1>
+    </div>
+
+    <div class="invoice__content">
+      <!-- ===== CUSTOMER & TRIP INFO ===== -->
+      <h2 class="section-title" style="margin-bottom: 50px;">Customer & Trip Details</h2>
+      <div class="info-grid">
+        <!-- Customer -->
+        <div class="info-box">
+          <p><strong><i class="fa-solid fa-user"></i> Name :</strong>Hitesh Bhardwaj</p>
+          <p><strong><i class="fa-solid fa-phone"></i> Mobile :</strong> 7982610057</p>
+          <p><strong><i class="fa-solid fa-envelope"></i> Email :</strong>hiteshbhardwaj84471@gmail.com</p>
+        </div>
+        <!-- Invoice / Trip -->
+        <div class="info-box">
+          <p><strong><i class="fa-solid fa-receipt"></i> Invoice # :</strong> 001</p>
+          <p><strong><i class="fa-solid fa-calendar-days"></i> Invoice Date :</strong> 22/09/2025</p>
+          <p><strong><i class="fa-solid fa-plane-departure"></i> Travel Date :</strong> 24/09/2025</p>
+        </div>
+      </div>
+
+      <!-- ===== SERVICE TABLE ===== -->
+      <h2 class="section-title" style="margin-bottom: 50px; font-size: large;">Travel Services</h2>
+      <table style="margin-bottom: 100px;">
+        <thead>
+          <tr>
+            <th style="width:34%">Service</th>
+            <th style="width:10%">Adults</th>
+            <th style="width:14%">Rate</th>
+            <th style="width:14%">Amount</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Manali-Sissu-Kasol</td>
+            <td>01</td>
+            <td>6500 /-</td>
+            <td>6500 /-</td>
+          </tr>
+          <!-- Additional rows as required -->
+        </tbody>
+      </table>
+
+      <!-- ===== TOTALS ===== -->
+      <table class="totals-table">
+        <tr>
+          <td>Grand Total</td>
+          <td>6500/-</td>
+        </tr>
+        <tr>
+          <td>Amount&nbsp;Received</td>
+          <td>2000 /-</td>
+        </tr>
+        <tr>
+          <td>Balance</td>
+          <td>4500 /-</td>
+        </tr>
+      </table>
+
+      <!-- ===== REFUND POLICY ===== -->
+      <p class="policy"><strong>Refund Policy:</strong> No refund will be made if you cancel the trip. If cancelled <strong>more than 30 days</strong> before departure, <strong>50&nbsp;%</strong> will be returned. If cancelled within <strong>15–30 days</strong>, <strong>25&nbsp;%</strong> will be returned. For cancellations within <strong>0–15 days</strong>, <strong>no refund</strong> will be processed.</p>
+    </div>
+
+    <div class="footer">
+      © 2025 Baehike Travel&nbsp;Co. • Adventure Awaits
+    </div>
+  </section>
+</body>
+</html>
